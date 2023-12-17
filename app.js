@@ -17,6 +17,16 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+// add prometheus register 
+const register = require('./service/prometheus.js')
+
+// route /metrics 
+app.get('/metrics', async(req, res) => {
+  const metrics = await  register.metrics()
+  res.set('Content-Type', register.contentType)
+  res.end(metrics)
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
