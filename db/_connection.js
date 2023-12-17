@@ -16,6 +16,6 @@ async function connectionDatabase(dbConfig) {
 
 
 
-const pool = connectionDatabase();
+const pool = connectionDatabase(config.db);
 
 module.exports = pool
