@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const responseTime = require('response-time');
 
 require('../db/_connection');   
 
@@ -7,6 +8,11 @@ require('../db/_connection');
 const morgan = require('morgan')
 app.use(morgan('tiny'))
 
+// middleware
+app.use(responseTime());
+
+app.use('*' , require('../router/global.js') ); //, next()
+  
 
 // route /metrics 
 app.use('/metrics', require('../router/metric.js'))
