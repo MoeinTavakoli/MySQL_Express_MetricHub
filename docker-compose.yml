@@ -1,6 +1,16 @@
 version: '3.1'
 services:
 
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus-db
+    volumes:
+      - "./prometheus-config/prometheus.yml:/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"
+    depends_on:
+     - api
+
   api:
     container_name: user-api
     build:
