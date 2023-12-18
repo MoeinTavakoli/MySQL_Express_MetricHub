@@ -14,6 +14,9 @@ async function getAllCustomers(req, res) {
 async function getCustomerByID(req, res) {
     try {
         const {id} = req.params;
+        const isNumeric = /^\d+$/.test(id);
+
+        if (!isNumeric) return res.status(400).json({ success: false, message : 'Invalid user ID. Must be a numeric digit.' })
         const customerInformation = await db.getCustomerByID(id);
         res.json({ success: true, customerInformation });
     }
