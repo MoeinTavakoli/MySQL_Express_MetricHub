@@ -1,21 +1,24 @@
-const { createConnection} = require('mysql');
-const config = require('../config')
+const mysql = require('mysql2/promise');
+const config = require('../config');
 
-async function connectionDatabase(dbConfig) {
-    try {
+const pool = mysql.createPool(config.db);
 
-        const pool = await createConnection( dbConfig )                  
-        console.info("database connected ...")
-        return pool
-        
-    } catch (error) {
-        console.error(error);
-        return error
-    }
+async function connection() {
+	const connection = await mysql.createConnection(configDB.db);
+	return connection;
+}
+
+async function query(sql, params) {
+	try {
+		const [ rows, fields ] = await pool.execute(sql, params);
+        return rows;
+	} catch (error) {
+		throw error;
+	}
 }
 
 
-
-const pool = connectionDatabase(config.db);
-
-module.exports = pool
+module.exports = {
+	query,
+	connection
+};  
