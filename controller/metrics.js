@@ -23,7 +23,7 @@ async function requestCounterController (req, res)  {
 async function responseTimeController (req, res , next)  {
     const start = req.startTime
     const end = Date.now();
-    responseTime.set({}, end-start )
+    responseTime.set({ method: req.method, status: res.statusCode }, end-start )
     await register.registerMetric(responseTime); // register metric manually
     next()
 }
