@@ -1,8 +1,11 @@
 const {query} = require('./_connection')
-
+const {ExecutionTimeAllUserExposer} = require('./metric')
 async function getAllCustomers() {
     try {
+        const start = Date.now();
         const result = await query('SELECT * FROM customers')
+        const end = Date.now();
+        ExecutionTimeAllUserExposer(end-start)
         console.log(result);
         return result
     } catch (error) {

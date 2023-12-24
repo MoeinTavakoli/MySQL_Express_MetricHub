@@ -10,11 +10,16 @@ const requestCounter = new client.Counter({
     labelNames: ['method', 'status'],
   });
   
+const queryExecAllDuration = new client.Gauge({
+    name: 'database_query_exec_all_record_duration_ms',
+    help: 'Duration of the database query exec for all records in ms',
+  });
 
 collectDefaultMetrics({ register });
 
 
 module.exports = {
     register,
-    requestCounter
+    requestCounter,
+    queryExecAllDuration,
 }
