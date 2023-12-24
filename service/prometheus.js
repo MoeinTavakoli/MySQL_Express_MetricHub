@@ -9,6 +9,11 @@ const requestCounter = new client.Counter({
     help: 'Total number statusCode of HTTP response',
     labelNames: ['method', 'status'],
   });
+const responseTime = new client.Gauge({
+    name: 'http_response_time_ms',
+    help: 'Total number statusCode of HTTP response in ms',
+    labelNames: ['method', 'status'],
+  });
 const queryExecAllDuration = new client.Gauge({
     name: 'database_query_exec_all_record_duration_ms',
     help: 'Duration of the database query exec for all records in ms',
@@ -28,4 +33,5 @@ module.exports = {
     requestCounter,
     queryExecAllDuration,
     queryExecOneDuration,
+    responseTime,   
 }

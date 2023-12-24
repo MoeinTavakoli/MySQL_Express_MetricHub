@@ -1,5 +1,5 @@
 // add prometheus register 
-const {register , requestCounter} = require('../service/prometheus.js')
+const {register , requestCounter , responseTime} = require('../service/prometheus.js')
 
 const client = require('prom-client');
 
@@ -20,8 +20,16 @@ async function requestCounterController (req, res)  {
   register.registerMetric(requestCounter); // register metric manually
 }
 
-
+async function responseTimeController (req, res , next)  {
+    const start = req.startTime
+    const end = Date.now();
+    responseTime.set({}, end-start )
+    await register.registerMetric(responseTime); // register metric manually
+    next()
+}
+  
 module.exports={
     metrics,
-    requestCounterController
+    requestCounterController,
+    responseTimeController
 }

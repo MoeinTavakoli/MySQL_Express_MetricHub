@@ -10,6 +10,13 @@ const morgan = require('morgan')
 app.use(morgan('tiny'))
 
 // middleware
+// add time to request object for calculate connection time
+app.use((req,res ,next)=>{
+  req.startTime = Date.now();
+  next()
+})
+
+// middleware
 app.use(responseTime());
 
 // route /metrics 
