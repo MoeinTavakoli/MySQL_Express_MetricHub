@@ -11,7 +11,7 @@ const requestCounter = new client.Counter({
   });
 const responseTime = new client.Gauge({
     name: 'http_response_time_ms',
-    help: 'Total number statusCode of HTTP response in ms',
+    help: 'time of HTTP response in ms',
     labelNames: ['method', 'status'],
   });
 const queryExecAllDuration = new client.Gauge({
