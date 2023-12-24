@@ -14,6 +14,11 @@ const responseTime = new client.Gauge({
     help: 'time of HTTP response in ms',
     labelNames: ['method', 'status'],
   });
+  const totalResponseCounter = new client.Summary({
+    name: 'http_total_response_time_ms',
+    help: 'total number of HTTP response in ms',
+    labelNames: ['method'],
+  });
 const queryExecAllDuration = new client.Gauge({
     name: 'database_query_exec_all_record_duration_ms',
     help: 'Duration of the database query exec for all records in ms',
@@ -33,5 +38,6 @@ module.exports = {
     requestCounter,
     queryExecAllDuration,
     queryExecOneDuration,
-    responseTime,   
+    responseTime,
+    totalResponseCounter,
 }
