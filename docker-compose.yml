@@ -1,0 +1,46 @@
+version: '3.1'
+services:
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus-db
+    volumes:
+      - "./prometheus-config/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - /tmp/prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    depends_on:
+     - api
+
+  api:
+    container_name: user-api
+    build:
+      context: ./
+    image: user-api
+    depends_on:
+     - db
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_HOST: user-database
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      SERVER_PORT: ${SERVER_PORT}
+    # volumes:
+    #   - './:/src'
+    links:
+     - db
+     
+  db:
+    container_name: user-database
+    build:
+      context: ./db/image
+    ports:
+      - "3306:3306"
+    # volumes:
+    #   - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db:
+    driver: local

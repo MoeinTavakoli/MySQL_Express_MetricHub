@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 
-// middleware
-const {requestCounterController} = require('../controller/metrics')
+
+
 // controller
 const controller = require('../controller/metrics.js');
+// middleware
+app.use(controller.requestCounterController)
 // 
-app.get('/' , controller.metrics , requestCounterController);
+// app.get('/' , controller.metrics);
 
 
 module.exports = app;
