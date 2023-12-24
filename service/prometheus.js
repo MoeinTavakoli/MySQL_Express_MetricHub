@@ -5,11 +5,10 @@ const Registry = client.Registry;
 let register = new Registry();
 
 const requestCounter = new client.Counter({
-    name: 'http_requests_total',
-    help: 'Total number of HTTP requests',
+    name: 'http_response_status_code_total',
+    help: 'Total number statusCode of HTTP response',
     labelNames: ['method', 'status'],
   });
-  
 const queryExecAllDuration = new client.Gauge({
     name: 'database_query_exec_all_record_duration_ms',
     help: 'Duration of the database query exec for all records in ms',
