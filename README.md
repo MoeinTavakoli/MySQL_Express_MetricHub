@@ -70,3 +70,5 @@ The following Prometheus metrics have been implemented in this project:
 #### 5. database_query_exec_one_record_duration_ms
    - **Help**: Duration of the database query execution for one record in milliseconds.
    - **Metric Type**: Gauge
+  
+More information about metrics and usage can be accessed at [here](./metrics.md)
