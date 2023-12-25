@@ -25,14 +25,20 @@ Navigate to the project directory:
 cd MySQL_Express_MetricHub
 ```
 
-Copy the example environment file and fill in the required details:
+Copy the example environment file and fill in the required details
+
+Open the .env file and provide the configuration.
 
 ```bash
 cp .env.example .env
 nano .env
 ```
 
-Open the .env file and provide the configuration.
+The next step, need directory to persist prometheus data 
+
+```bash
+sudo mkdir /var/lib/prometheus-data/ ; sudo chown 65534:65534 /var/lib/prometheus-data/
+```
 
 Start the application using Docker Compose:
 
