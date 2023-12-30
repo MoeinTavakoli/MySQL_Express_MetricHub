@@ -7,7 +7,7 @@ async function getAllCustomers(req, res , next) {
         next()
     }
     catch (error) {
-        res.status(400).json({ success: false, error });
+        res.status(400).json({ success: false, error: error.message });
     }
 }
 
@@ -15,7 +15,6 @@ async function getAllCustomers(req, res , next) {
 async function getCustomerByID(req, res , next) {
     try {
         const {id} = req.params;
-        const isNumeric = /^\d+$/.test(id);
 
         if (!Number(id))
             {
@@ -28,7 +27,7 @@ async function getCustomerByID(req, res , next) {
         next()
     }
     catch (error) {
-        res.status(400).json({ success: false, error });
+        res.status(400).json({ success: false, error: error.message });
         next();
     }
 }
